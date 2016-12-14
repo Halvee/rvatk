@@ -1,0 +1,14 @@
+a sample1 sample3 sample4 2 2 C A C C G G A A C C G G G G
+a sample2 sample3 sample4 1 2 A A C C G G A A C C G G G G
+a sample3 0 0 1 1 C A C C G G A A C C G G G G
+a sample4 0 0 2 1 A A C C G G A A C C G G G G
+b sample5 sample7 sample8 2 2 A A C C C G A A C C A G G G
+b sample6 sample7 sample9 1 2 A A C C G G A A C C A G G G
+b sample7 0 0 1 1 A A C C G G A A C C G G G G
+b sample8 0 0 2 1 A A C C C G A A C C A A G G
+ctrl1 ctrl1 0 0 1 1 A A T C G G A A C C G G G G
+ctrl2 ctrl2 0 0 2 1 A A C C G G A A C C G G T G
+ctrl3 ctrl3 0 0 1 1 A A C C G G A A C C G G G G
+ctrl4 ctrl4 0 0 2 1 A A C C G G A A T C G G G G
+ctrl5 ctrl5 0 0 1 1 A A C C G G A A C C G G G G
+ctrl6 ctrl6 0 0 2 1 A A C C G G C A C C G G G G

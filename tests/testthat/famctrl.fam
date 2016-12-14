@@ -1,0 +1,14 @@
+a sample1 sample3 sample4 2 2
+a sample2 sample3 sample4 1 2
+a sample3 0 0 1 1
+a sample4 0 0 2 1
+b sample5 sample7 sample8 2 2
+b sample6 sample7 sample9 1 2
+b sample7 0 0 1 1
+b sample8 0 0 2 1
+ctrl1 ctrl1 0 0 1 1
+ctrl2 ctrl2 0 0 2 1
+ctrl3 ctrl3 0 0 1 1
+ctrl4 ctrl4 0 0 2 1
+ctrl5 ctrl5 0 0 1 1
+ctrl6 ctrl6 0 0 2 1

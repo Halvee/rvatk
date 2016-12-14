@@ -1,0 +1,22 @@
+Package: rvatk
+Title: Rare Variant Analysis Toolkit
+Version: 1.0.0
+Author: Matt Halvorsen [aut, cre]
+Maintainer: Matt Halvorsen <mhalvors1@gmail.com>
+Authors@R: person("Matt", "Halvorsen", email = "mhalvors1@gmail.com", role = c("aut", "cre"))
+Description: Package that allows for easier analysis of rare variant genetic data.
+             Includes libraries for interfacing with filetypes used at the Institute of Genomic 
+             Medicine at Columbia University, as well as other common file types such as plink BED.
+             Also includes scripts that utilize the package for rare variant analysis.
+Depends:
+    R (>= 3.2.2)
+License: GPL (>= 2)
+Encoding: UTF-8
+LazyData: true
+Suggests:
+    testthat
+Imports:
+    snpStats,
+    data.table,
+    methods
+RoxygenNote: 5.0.1

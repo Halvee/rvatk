@@ -1,0 +1,8 @@
+sample1	sample1	sample3	sample4	2	2	Exome	Roche
+sample5	sample5	sample7	sample8	2	2	Exome	Roche
+ctrl1	ctrl1	0	0	1	1	Exome	Roche
+ctrl2	ctrl2	0	0	2	1	Exome	Roche
+ctrl3	ctrl3	0	0	1	1	Exome	Roche
+ctrl4	ctrl4	0	0	2	1	Exome	Roche
+ctrl5	ctrl5	0	0	1	1	Exome	Roche
+ctrl6	ctrl6	0	0	2	1	Exome	Roche

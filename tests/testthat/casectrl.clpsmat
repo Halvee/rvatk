@@ -1,0 +1,4 @@
+sample/gene	sample1	sample5	ctrl1	ctrl2	ctrl3	ctrl4	ctrl5	ctrl6
+GENE1	1	1	1	0	0	0	0	0
+GENE2	0	1	0	1	0	1	0	1
+GENE3	0	0	0	0	0	0	0	0
