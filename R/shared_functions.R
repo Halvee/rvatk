@@ -51,7 +51,6 @@ AddLooMafCol <- function(geno, n.samples, variant.id.col="Variant ID") {
   if (length(var.loo.counts) > 0) {
     unique.counts <- sort(as.numeric(unique(var.loo.counts)))
     max.loo.count <- max(var.loo.counts)
-    print(unique.counts)
     for (i in unique.counts) {
       vars <- names(var.loo.counts[var.loo.counts == i])
       loo.maf.i <- as.numeric(i / n.samples)
@@ -118,19 +117,23 @@ ApplyThreshold <- function(tbl, col.name, cmp, val) {
   } else if (cmp == "grepv") {
     tbl <- tbl[ which(grepl(val, tbl[[col.name]]) == F), , drop=F]
   } else if (cmp == "eq" | cmp == "==") {
-    tbl <- tbl[ which(tbl[[col.name]] == val), , drop =F]
+    tbl <- tbl[ which(tbl[[colname]] == val), , drop =F]
   } else if (cmp == "gt" | cmp == ">") {
     val <- as.double(val)
-    tbl <- tbl[ which(as.double(tbl[[col.name]]) > val), , drop =F]
+    valset <- as.double( tbl[[col.name]] )
+    tbl <- tbl[ which(valset > val), , drop =F]
   } else if (cmp == "gte" | cmp == ">=") {
     val <- as.double(val)
-    tbl <- tbl[ which(as.double(tbl[[col.name]]) >= val), , drop =F]
+    valset <- as.double( tbl[[col.name]] )
+    tbl <- tbl[ which(valset >= val), , drop =F]
   } else if (cmp == "lt" | cmp == "<") {
     val <- as.double(val)
-    tbl <- tbl[ which(as.double(tbl[[col.name]]) < val), , drop =F]
+    valset <- as.double( tbl[[col.name]] )
+    tbl <- tbl[ which(valset < val), , drop =F]
   } else if (cmp == "lte" | cmp == "<=") {
     val <- as.double(val)
-    tbl <- tbl[ as.double(which(tbl[[col.name]]) <= val), , drop =F]
+    valset <- as.double( tbl[[col.name]] )
+    tbl <- tbl[ which(valset <= val), , drop =F]
   }
   return(tbl)
 }
