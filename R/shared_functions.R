@@ -121,16 +121,16 @@ ApplyThreshold <- function(tbl, col.name, cmp, val) {
     tbl <- tbl[ which(tbl[[col.name]] == val), , drop =F]
   } else if (cmp == "gt" | cmp == ">") {
     val <- as.double(val)
-    tbl <- tbl[ which(tbl[[col.name]] > val), , drop =F]
+    tbl <- tbl[ which(as.double(tbl[[col.name]]) > val), , drop =F]
   } else if (cmp == "gte" | cmp == ">=") {
     val <- as.double(val)
-    tbl <- tbl[ which(tbl[[col.name]] >= val), , drop =F]
+    tbl <- tbl[ which(as.double(tbl[[col.name]]) >= val), , drop =F]
   } else if (cmp == "lt" | cmp == "<") {
     val <- as.double(val)
-    tbl <- tbl[ which(tbl[[col.name]] < val), , drop =F]
+    tbl <- tbl[ which(as.double(tbl[[col.name]]) < val), , drop =F]
   } else if (cmp == "lte" | cmp == "<=") {
     val <- as.double(val)
-    tbl <- tbl[ which(tbl[[col.name]] <= val), , drop =F]
+    tbl <- tbl[ as.double(which(tbl[[col.name]]) <= val), , drop =F]
   }
   return(tbl)
 }
