@@ -3,9 +3,7 @@
 require(optparse)
 require(data.table)
 
-require(devtools)
-devtools::load_all("/Users/mh3534/devel/rvatk")
-#require(rvatk)
+require(rvatk)
 
 Main <- function() {
   option.list <- GetOptList()
@@ -30,8 +28,8 @@ Main <- function() {
   lva <- ReadLargeTable(opt$listvaranno.csv, 
                         showProgress=F, 
                         header=T, check.names=F)
-  print(lva[[kGeneNameCol]])
-  lva[[kGeneNameCol]] <- gsub("'","",lva[[kGeneNameCol]])   
+
+  lva[[opt$gene.name.col]] <- gsub("'","",lva[[opt$gene.name.col]])   
 
   var.names <- c()                                                              
   var.genes <- c()                                                              
@@ -53,8 +51,8 @@ Main <- function() {
     
     # keep track of each variant, the gene it maps to and its variant class,
     # as defined by the condition file
-    var.names <- c(var.names, lva.cls[[kVariantIdCol]])
-    var.genes <- c(var.genes, lva.cls[[kGeneNameCol]])
+    var.names <- c(var.names, lva.cls[[opt$variant.id.col]])
+    var.genes <- c(var.genes, lva.cls[[opt$gene.name.col]])
     
     var.classes <- c(var.classes, rep(cls, nrow(lva.cls)) )
   }
@@ -94,7 +92,27 @@ GetOptList <- function() {
     make_option(c("--include-loo-maf"), action="store_true", default=FALSE,      
                     dest="include.loo.maf",
                     help="do not remove 'loo maf' from condition table,
-                          if it is present")
+                          if it is present"),
+
+    make_option(c("--gene-name-col"), action="store", type="character",
+                default="Gene Name", dest="gene.name.col",
+                help="Gene name column to subset genotype csv on,
+                      if no qualvar file is provided [default %default]"),
+
+    make_option(c("--variant-id-col"), action="store", type="character",
+                default="Variant ID", dest="variant.id.col",
+                help="variant ID column to subset genotype csv on,
+                      if no qualvar file is provided [default %default]"),
+
+    make_option(c("--sample-name-col"), action="store", type="character",
+                default="Sample Name", dest="sample.name.col",
+                help="Sample name column to subset genotype csv on,
+                      if no qualvar file is provided [default %default]"),
+
+    make_option(c("--genotype-col"), action="store", type="character",
+                default="Genotype", dest="genotype.col",
+                help="Sample name column to subset genotype csv on,
+                      if no qualvar file is provided [default %default]")
   )
 
   return(option.list)
