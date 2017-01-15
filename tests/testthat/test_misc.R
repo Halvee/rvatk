@@ -49,3 +49,80 @@ test_that("read .genesets files", {
   genesets.test <- ReadGenesetsFile("genes.genesets")
   expect_equal(genesets, genesets.test)
 })
+
+test_that("condition file reading", {
+  cnd <- data.frame(col.name=c("sampleID", 
+                               "sampleID",
+                               "varA", 
+                               "varA"),
+                    rel.operator=c("eq", "==",
+                                   "lte", "<="),
+                    val=c("sample1", "sample1",
+                           "2", "2"), stringsAsFactors=F)
+  cnd.file <- ReadConditionFile("test.condition")
+  expect_equal(cnd, cnd.file)
+})
+
+test_that("subsetting based on condition tables (string subsetting)", {
+  data <- data.frame(sampleID=paste("sample", seq(1,5), sep=""),
+                     varA=c(1,2,3,1,2),
+                     varB=c("X","Y","X","X","Y"),
+                     varC=c(10.0, 10.1, 10.2,
+                            10.1, 9.9), stringsAsFactors=F )
+  rownames(data) <- NULL
+
+  cnd.1 <- data.frame(col.name=c("varB"), 
+                      rel.operator=c("=="), 
+                      val=c("Y"), stringsAsFactors=F)
+  symbols <- c("==", "!=")
+  strs <- c("eq", "noteq")
+  nrows <- c(2, 3)
+  for (i in 1:2) {
+    cnd.1[1, "rel.operator"] <- symbols[i]
+    data.1.test <- TblCndSubset(data, cnd.1)
+    expect_equal(nrow(data.1.test), nrows[i])
+    cnd.1[1, "rel.operator"] <- strs[i]
+    data.1.test <- TblCndSubset(data, cnd.1)
+    expect_equal(nrow(data.1.test), nrows[i])
+  }
+  
+  strs <- c("in", "notin")
+  nrows <- c(2, 3)
+  for (i in 1:2) {
+    cnd.1[1, "rel.operator"] <- strs[i]
+    data.1.test <- TblCndSubset(data, cnd.1)
+    expect_equal(nrow(data.1.test), nrows[i])
+  }
+
+  strs <- c("grep","grepv")
+  nrows <- c(2, 3)
+  for (i in 1:2) {
+    cnd.1[1, "rel.operator"] <- strs[i] 
+    data.1.test <- TblCndSubset(data, cnd.1)
+    expect_equal(nrow(data.1.test), nrows[i])
+  }
+})
+
+test_that("subsetting based on condition tables (numeric subsetting)", {
+  data <- data.frame(sampleID=paste("sample", seq(1,5), sep=""),
+                     varA=c(1,2,3,1,2),
+                     varB=c("X","Y","X","X","Y"),
+                     varC=c(10.0, 10.1, 10.2,
+                            10.1, 9.9), stringsAsFactors=F )
+  rownames(data) <- NULL
+
+  cnd.2 <- data.frame(col.name=c("varC"),
+                      rel.operator=c("<"), 
+                      val=c("10.1"), stringsAsFactors=F)
+  symbols <- c("<", "<=", "==", "!=", ">=", ">")
+  strs <- c("lt", "lte", "eq", "noteq", "gte", "gt")
+  nrows <- c(2, 4, 2, 3, 3, 1)
+  for (i in 1:5) {
+    cnd.2[1, "rel.operator"] <- symbols[i]
+    data.2.test <- TblCndSubset(data, cnd.2)
+    expect_equal(nrow(data.2.test), nrows[i] )
+    cnd.2[1, "rel.operator"] <- strs[i]
+    data.2.test <- TblCndSubset(data, cnd.2)
+    expect_equal(nrow(data.2.test), nrows[i] )
+  }
+})

@@ -117,7 +117,9 @@ ApplyThreshold <- function(tbl, col.name, cmp, val) {
   } else if (cmp == "grepv") {
     tbl <- tbl[ which(grepl(val, tbl[[col.name]]) == F), , drop=F]
   } else if (cmp == "eq" | cmp == "==") {
-    tbl <- tbl[ which(tbl[[colname]] == val), , drop =F]
+    tbl <- tbl[ which(tbl[[col.name]] == val), , drop =F]
+  } else if (cmp == "noteq" | cmp == "!=") {
+    tbl <- tbl[ which(tbl[[col.name]] != val), , drop =F]
   } else if (cmp == "gt" | cmp == ">") {
     val <- as.double(val)
     valset <- as.double( tbl[[col.name]] )
@@ -317,9 +319,13 @@ GetAlleleCounts <- function(sample.ID,
   }
   gender <- as.numeric(unlist(samplegender[ calls$sample.ID ]))
   calls$gender <- gender
-  calls[ grepl("X-", calls$variant.ID) &
-         calls$gender == 1 &
-         calls$genotype == 2, "genotype"] <- 1
+  if ( nrow(calls[ (grepl("X-", calls$variant.ID)) &
+                   (calls$gender == 1) & 
+                   (calls$genotype == 2), ]) > 0) {
+    calls[ grepl("X-", calls$variant.ID) &
+           calls$gender == 1 &
+           calls$genotype == 2, "genotype"] <- 1
+  }
   return(calls$genotype)
 }
 

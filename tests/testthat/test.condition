@@ -1,0 +1,4 @@
+sampleID eq sample1
+sampleID == "sample1"
+"varA" lte 2
+varA <= 2
