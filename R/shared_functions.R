@@ -105,7 +105,8 @@ StringToSet <- function(str,
 #' @param cmp string representing which operator to apply on df column.
 #' @param val value linked to input tbl by cmp operator.
 #' @export
-ApplyThreshold <- function(tbl, col.name, cmp, val) {
+ApplyThreshold <- function(tbl, col.name, cmp, val,
+                           na.numeric.convert=0) {
   if (cmp == "in") {
     valset <- StringToSet(val)
     tbl <- tbl[ which(tbl[[col.name]] %in% valset), , drop=F]
@@ -123,18 +124,22 @@ ApplyThreshold <- function(tbl, col.name, cmp, val) {
   } else if (cmp == "gt" | cmp == ">") {
     val <- as.double(val)
     valset <- as.double( tbl[[col.name]] )
+    valset <- ifelse(is.na(valset), na.numeric.convert, valset)
     tbl <- tbl[ which(valset > val), , drop =F]
   } else if (cmp == "gte" | cmp == ">=") {
     val <- as.double(val)
     valset <- as.double( tbl[[col.name]] )
+    valset <- ifelse(is.na(valset), na.numeric.convert, valset) 
     tbl <- tbl[ which(valset >= val), , drop =F]
   } else if (cmp == "lt" | cmp == "<") {
     val <- as.double(val)
     valset <- as.double( tbl[[col.name]] )
+    valset <- ifelse(is.na(valset), na.numeric.convert, valset) 
     tbl <- tbl[ which(valset < val), , drop =F]
   } else if (cmp == "lte" | cmp == "<=") {
     val <- as.double(val)
     valset <- as.double( tbl[[col.name]] )
+    valset <- ifelse(is.na(valset), na.numeric.convert, valset) 
     tbl <- tbl[ which(valset <= val), , drop =F]
   }
   return(tbl)
